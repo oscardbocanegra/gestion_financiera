@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión Financiera</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Registro de Ingresos y Gastos</h1>
+    <form @submit.prevent="addTransaction">
+      <input v-model="description" placeholder="Descripción" required>
+      <input v-model.number="amount" type="number" placeholder="Monto" required>
+      <select v-model="type">
+        <option value="ingreso">Ingreso</option>
+        <option value="gasto">Gasto</option>
+      </select>
+      <button type="submit">Añadir</button>
+    </form>
+    <div class="balance">
+      <h2>Balance General: {{ balance }}</h2>
+    </div>
+    <ul>
+      <li v-for="transaction in transactions" :key="transaction.id">
+        {{ transaction.description }} - {{ transaction.amount }} ({{ transaction.type }})
+      </li>
+    </ul>
+    <canvas id="myChart"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
